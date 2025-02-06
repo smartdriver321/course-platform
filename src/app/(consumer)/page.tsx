@@ -1,10 +1,11 @@
-//import { asc } from 'drizzle-orm'
+import { asc } from 'drizzle-orm'
 import { cacheTag } from 'next/dist/server/use-cache/cache-tag'
 
 import { db } from '@/drizzle/db'
 import { getProductGlobalTag } from '@/features/products/db/cache'
 import { ProductCard } from '@/features/products/components/ProductCard'
 import { wherePublicProducts } from '@/features/products/permissions/products'
+import { ProductTable } from '@/drizzle/schema'
 
 export default async function HomePage() {
 	const products = await getPublicProducts()
@@ -33,6 +34,6 @@ async function getPublicProducts() {
 			imageUrl: true,
 		},
 		where: wherePublicProducts,
-		//orderBy: asc(ProductTable.name),
+		orderBy: asc(ProductTable.name),
 	})
 }
